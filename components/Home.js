@@ -89,6 +89,13 @@ export const HomeScreen = ({ navigation }) => {
       {Platform.OS === "web" ? (
         <View style={HomePage.settingsAndSelection}>
           <View style={HomePage.settingsPanel}>
+            <View style={HomePage.logoStyle}>
+              <Image
+                style={HomePage.logoImage}
+                source={require("../assets/logo.png")}
+              />
+              <Text style={HomePage.logoText}>Satiate</Text>
+            </View>
             <View style={HomePage.settingsProfile}>
               <Image
                 style={HomePage.settingsImage}
@@ -164,7 +171,7 @@ export const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       ) : (
-        <Text>Hello Not World</Text>
+        <Text>Not Ready!</Text>
       )}
     </SafeAreaView>
   );

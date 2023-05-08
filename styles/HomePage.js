@@ -48,7 +48,7 @@ export const HomePage = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopColor: "lightgray",
     borderTopWidth: 1,
-    marginTop: 300,
+    marginTop: 240,
   },
   settingsProfileText: {
     fontWeight: 600,
@@ -100,6 +100,21 @@ export const HomePage = StyleSheet.create({
     fontFamily: Platform.OS === "android" ? "Roboto" : "",
     borderColor: "lightgray",
     borderWidth: 2,
+  },
+  logoImage: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+  },
+  logoText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#1fb4a1",
+  },
+  logoStyle: {
+    flexDirection: "row",
+    flex: 1,
+    height: 60,
   },
 });
 
