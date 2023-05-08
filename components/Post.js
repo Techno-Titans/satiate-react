@@ -41,17 +41,24 @@ export const Post = () => {
         url: doc.data().url,
       }));
       setPosts(postData);
+      console.log(postData);
     };
     fetchData();
-    console.log(posts);
   }, []);
   return (
     <>
       {posts.map((item, index) => (
         <View key={index} style={PostDesign.backgroundStyle}>
           <View style={PostDesign.imageStyle}>
-            <Image style={PostDesign.image} source={{ uri: item.url }} />
+            <Image
+              style={PostDesign.image}
+              source={{
+                uri:
+                  item.url == null ? "https://picsum.photos/150/250" : item.url,
+              }}
+            />
           </View>
+
           <View style={PostDesign.textStyle}>
             <Text style={PostDesign.titleStyle}>
               {item.title} - {item.type}
@@ -61,7 +68,6 @@ export const Post = () => {
           </View>
         </View>
       ))}
-      ;
     </>
   );
   // <View style={PostDesign.backgroundStyle}>

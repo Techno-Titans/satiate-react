@@ -1,28 +1,24 @@
 import {
   View,
-  Button,
   Image,
   Text,
-  StyleSheet,
-  FlatList,
   TextInput,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
   Platform,
-  Picker,
+  ScrollView,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { firebase } from "../firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { HomePage, PostView, PostDesign } from "../styles/HomePage";
 import {
-  getFirestore,
-  serverTimestamp,
-  collection,
-  addDoc,
-  getDocs,
-} from "firebase/firestore";
+  HomePage,
+  PostView,
+  PostDesign,
+  AndroidHomePage,
+} from "../styles/HomePage";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { Post } from "./Post";
 
 const auth = getAuth(firebase);
@@ -171,7 +167,70 @@ export const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       ) : (
-        <Text>Not Ready!</Text>
+        <>
+          <ScrollView style={AndroidHomePage.selectionPanel}>
+            <Post />
+          </ScrollView>
+          <View style={AndroidHomePage.taskBar}>
+            <TouchableOpacity
+              onPress={ShowPostView}
+              style={[AndroidHomePage.taskText, { marginLeft: 30 }]}
+            >
+              <Text>Post</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={signOutOfAccount}
+              style={[AndroidHomePage.taskText, { marginRight: 30 }]}
+            >
+              <Text>Sign Out</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={AndroidHomePage.logoBar}>
+            <Image
+              style={AndroidHomePage.imageLogo}
+              source={require("../assets/logo.png")}
+            />
+          </View>
+          <View style={[PostView.backgroundStyle, postDisplayValue]}>
+            <TouchableOpacity
+              onPress={HidePostView}
+              style={PostView.closeButtonTouch}
+            >
+              <Image
+                style={PostView.closeButton}
+                source={require("../assets/close.png")}
+              />
+            </TouchableOpacity>
+            <Picker
+              selectedValue={selectedValue}
+              onValueChange={(itemValue) => setSelectedValue(itemValue)}
+              style={PostView.postDropdownButton}
+            >
+              <Picker.Item label="Donation" value="donation" />
+              <Picker.Item label="Pickup" value="pickup" />
+            </Picker>
+            <TextInput
+              style={PostView.titleInput}
+              value={title}
+              onChangeText={setTitle}
+              placeholder="Title"
+              placeholderTextColor="lightgray"
+            />
+            <TextInput
+              style={PostView.captionInput}
+              value={caption}
+              onChangeText={setCaption}
+              placeholder="Caption"
+              placeholderTextColor="lightgray"
+            />
+            <TouchableOpacity
+              onPress={createPost}
+              style={PostView.postDisplayButton}
+            >
+              <Text>Post</Text>
+            </TouchableOpacity>
+          </View>
+        </>
       )}
     </SafeAreaView>
   );
